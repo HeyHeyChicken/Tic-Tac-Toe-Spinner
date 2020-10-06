@@ -1,0 +1,181 @@
+/*!
+ * Tic Tac Toe Spinner 1.1.1
+ * https://github.com/HeyHeyChicken/Tic-Tac-Toe-Spinner
+ * @license MIT licensed
+ *
+ * Copyright (C) 2019 Duval Antoine (HeyHeyChicken)
+ */
+
+@import "../submodules/SCSS-Mixins/src/SCSS-Mixins";
+
+@include keyframes(logo_x){
+  0%, 12%{
+    @include transform(rotate(45deg));
+    margin : 20px;
+  }
+
+  24%, 36%{
+    @include transform(rotate(90deg));
+    margin : 0px -5px 0px 0px;
+  }
+
+  48%, 60%{
+    @include transform(rotate(135deg));
+    margin : 20px;
+  }
+
+  72%, 84%{
+    @include transform(rotate(180deg));
+    margin : 0px -5px 0px 0px;
+  }
+
+  96%, 100%{
+    @include transform(rotate(225deg));
+    margin : 20px;
+  }
+}
+
+@include keyframes(logo_o){
+  0%, 12%, 48%, 60%, 96%, 100%{
+    margin : 20px;
+  }
+
+  24%, 36%, 72%, 84%{
+    margin : 0px;
+  }
+}
+
+@include keyframes(logo){
+  0%, 12%, 24%{
+    @include transform(translate(-50%, -50%) rotate(0deg));
+  }
+
+  36%, 48%, 60%, 72%{
+    @include transform(translate(-50%, -50%) rotate(180deg));
+  }
+
+  84%, 96%, 100%{
+    @include transform(translate(-50%, -50%) rotate(360deg));
+  }
+}
+
+$transition_time : 0.2s;
+$background: white;
+$color: #0366d6;
+
+html{
+  > body{
+    margin : 0px;
+    background-color : $background;
+
+    > .Tic-Tac-Toe-Spinner{
+      position : absolute;
+      top : 50%;
+      left : 50%;
+      @include transform(translate(-50%, -50%));
+      text-transform : uppercase;
+      animation-name : logo;
+      animation-iteration-count : infinite;
+      animation-timing-function : linear;
+      animation-duration : 2.5s;
+
+      > .x, > .o{
+        height : 120px;
+        width : 120px;
+        position : relative;
+        float : left;
+        animation-iteration-count : infinite;
+        animation-timing-function : linear;
+        animation-duration : 2.5s;
+      }
+
+      > .x{
+        animation-name : logo_x;
+
+        > div, > span{
+          position : absolute;
+          @include border-radius(5px);
+        }
+
+        > div{
+          background-color : $color;
+          top : 50%;
+          left : 50%;
+          @include transform(translate(-50%, -50%));
+
+          &.a{
+            height : 120px;
+            width : 32px;
+          }
+
+          &.b{
+            height : 32px;
+            width : 120px;
+          }
+        }
+
+        > span{
+          background-color : $background;
+          height : 44px;
+          width : 44px;
+
+          &.a{
+            top : 0px;
+            left : 0px;
+          }
+
+          &.b{
+            top : 0px;
+            right : 0px;
+          }
+
+          &.c{
+            bottom : 0px;
+            left : 0px;
+          }
+
+          &.d{
+            bottom : 0px;
+            right : 0px;
+          }
+        }
+
+        &:before{
+          content : "";
+          top : 50%;
+          left : 50%;
+          height : 50%;
+          width : 50%;
+          background-color : $color;
+          @include transform(translate(-50%, -50%));
+          position : absolute;
+        }
+      }
+
+      > .o{
+        animation-name : logo_o;
+
+        &:after, &:before{
+          content : "";
+          position : absolute;
+          top : 50%;
+          left : 50%;
+          @include transform(translate(-50%, -50%));
+          @include border-radius(50%);
+        }
+
+        &:before{
+          height : 100%;
+          width : 100%;
+          background-color : $color;
+        }
+
+        &:after{
+          height : 52px;
+          width : 52px;
+          background-color : $background;
+        }
+      }
+    }
+  }
+}
